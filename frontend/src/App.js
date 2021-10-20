@@ -1,27 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
-
-export function App() {
+import { Route, Redirect, Switch } from 'react-router';
+import {Home, Navigation }from 'features/common';
+import {UserAdd, UserDetail, UserList, UserLogin, UserModify, UserRemove} from 'features/user'
+import { BrowserRouter as Router } from 'react-router-dom'
+const App= () => {
   return (
-    <div>
-      <Header/>
-   <BlogNavigation/>
-   
-   {/* <Navigation/> */}
-   <Switch>
-   <Route exact path='/'component = {Home}/>
-   <Redirect from='/home'to = {'/'}/>
-   <Route exact path='/course-register'component = {CourseRegister}/>
-   <Route exact path ='/Login' component = {Login}/>
-   <Route exact path='/online-profile'component = {OnlineProfile}/>
-   <Route exact path='/school-staus'component = {SchoolStaus}/>
-   <Route exact path='/join'component = {Join}/>
-   <Route exact path='/header'component = {Header}/>
-   <Route exact path='/basic'component = {Basic}/>
-   </Switch>
-   <HomePage/>
+    <div className="App">
+      <Router>
+      <Navigation/>
+      <Switch>
+        <Route exact path='/' component= {Home}/>
+        <Redirect from='/home' to ={'/'}/>
+        <Route exact path='/userAdd' component={UserAdd}/>
+        <Route exact path='/userDetail' component={UserDetail}/>
+        <Route exact path='/userList' component={UserList}/>
+        <Route exact path='/userLogin' component={UserLogin}/>
+        <Route exact path='/userModify' component={UserModify}/>
+        <Route exact path='/userRemove' component={UserRemove}/>
+      </Switch>
+      </Router>
     </div>
   );
 }
+
+export default App;

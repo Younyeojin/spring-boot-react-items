@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from './userSlice';
-import styles from './User.module.css';
 
-export function User() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+export default function UserDetail() {
+  
+    return (
 
-  return (
     <div>
         <figure>
-        <img src={logo}/>
+        {/* <img src={logo}/> */}
         <figcaption>오늘은 남은 인생이 시작되는 첫째날</figcaption>
         </figure>
     <h1>Jenny</h1>

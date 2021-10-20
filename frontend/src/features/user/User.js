@@ -7,8 +7,8 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from './userSlice';
-import styles from './User.module.css';
+} from './counterSlice';
+import styles from './Counter.module.css';
 
 export function User() {
   const count = useSelector(selectCount);
@@ -19,9 +19,7 @@ export function User() {
 
   return (
     <div>
-      <h1>
-        
-      </h1>
+      <h1></h1>
     </div>
   );
 }

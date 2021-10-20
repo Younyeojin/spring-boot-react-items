@@ -1,16 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-export const Navigation() {return (
+export default function Navigation() {
+    return(
     <nav>
     <ol>
     <li><Link to="/home">Home</Link></li>
-    <li><Link to="/course-register">과목 등록2</Link></li>
-    <li><Link to="/Login">로그인</Link></li>
-    <li><Link to="/online-profile">프로필</Link></li>
-    <li><Link to="/scool-staus">학교 현황</Link></li>
-    <li><Link to="/join">회원가입</Link></li>
+    <li><Link to="/userAdd">userAdd</Link></li>
+    <li><Link to="/userLogin">userLogin</Link></li>
+    <li><Link to="/userDetail">userDetail</Link></li>
+    <li><Link to="/userList">userList</Link></li>
+    <li><Link to="/userLogin">userLogin</Link></li>
+    <li><Link to="/userModify">userModify</Link></li>
+    <li><Link to="/userRemove">userRemove</Link></li>
     </ol>
-</nav>)
+</nav>);
     
 }
