@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class ItemController implements CommonController<Item, Long> {
-    private final ItemController itemController;
     private final ItemService itemService;
     private final ItemRepository itemRepository;
 

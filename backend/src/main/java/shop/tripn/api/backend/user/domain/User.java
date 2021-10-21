@@ -16,7 +16,7 @@ public class User {
     @Column(name="user_id")
     @GeneratedValue
     private long userId;
-    @Column(name = "user_name", length = 50) @NotNull private String userName;
+    @Column(name = "user_name", length = 50) @NotNull private String username;
     @Column(length = 10) @NotNull private String password;
     @Column(length = 50) @NotNull private String name;
     @Column(length = 50) @NotNull private String email;

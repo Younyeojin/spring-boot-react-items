@@ -24,8 +24,6 @@ public class UserController implements CommonController<User, Long> {
     private final UserService userService;
     private final UserRepository userRepository;
 
-
-
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
         return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
@@ -37,7 +35,7 @@ public class UserController implements CommonController<User, Long> {
         User user = userService.findById(id).get();
         UserDto userSerializer = UserDto.builder()
                 .userId(user.getUserId())
-                .username(user.getUserName())
+                .username(user.getUsername())
                 .password(user.getPassword())
                 .name(user.getName())
                 .email(user.getEmail())
@@ -83,4 +81,7 @@ public class UserController implements CommonController<User, Long> {
         userRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }
+
+
 }
+
