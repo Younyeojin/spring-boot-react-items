@@ -8,11 +8,13 @@ import shop.tripn.api.backend.user.domain.User;
 import shop.tripn.api.backend.user.domain.UserDto;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
-    @Query(value = "select username , password from users where users.username=:username and users.password=:passowrd",
+    @Query(value = "select u.username, u.user_id userId, u.name, u.email, u.reg_date regDate, u.password  " +
+            "from users u where u.username = :username and u.password = :password",
             nativeQuery = true)
-    UserDto login(@Param("username") String username, @Param("password") String password);
+    Optional<User> login(@Param("username") String username, @Param("password") String password);
 }

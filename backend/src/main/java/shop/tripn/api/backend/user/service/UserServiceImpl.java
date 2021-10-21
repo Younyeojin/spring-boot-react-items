@@ -8,9 +8,9 @@ import shop.tripn.api.backend.user.repository.UserRepository;
 
 import java.util.Optional;
 
-@Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+@Service
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
 
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDto login(String username, String password) {
+    public Optional<User> login(String username, String password) {
         return userRepository.login(username, password);
     }
 }
