@@ -1,6 +1,22 @@
-// A mock function to mimic making an async request for data
-export function fetchCount(amount = 1) {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500)
-  );
+import axios from 'axios';
+const SERVER = 'http://localhost:8080'
+const headers = {
+  'Content-Type' : 'application/json',
+  'Authorization': 'JWT fefege..'
+}
+
+const userJoin = x => axios.post(`${SERVER}/users`, JSON.stringify(x),{headers})
+const userFetchOne = x =>  axios.get(`${SERVER}/users/${x.userId}`)
+const userFetchList = () => axios.get(`${SERVER}/users`)
+const userLogin = x => axios.post(`${SERVER}/users/login`, JSON.stringify(x),{headers})
+const userModify = x => axios.put(`${SERVER}/users`, JSON.stringify(x),{headers})
+const userRemove = x => axios.delete(`${SERVER}/users/${x.userId}`)
+
+export default {
+  userJoin,
+  userFetchOne,
+  userFetchList,
+  userLogin,
+  userModify,
+  userRemove
 }
