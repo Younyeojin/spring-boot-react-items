@@ -25,4 +25,11 @@ const userRemovePage = async(x) => {
   return res.data
 }
 
+export const joinPage = createAsyncThunk('users/join', userJoinPage)
+export const FetchOnePage = createAsyncThunk('users/one', userFetchOnePage)
+export const FetchListPage = createAsyncThunk('users/list', userFetchListPage)
+export const LoginPage = createAsyncThunk('users/login', userLoginPage)
+export const ModifyPage = createAsyncThunk('users/modify', userModifyPage)
+export const RemovePage = createAsyncThunk('users/remove', userRemovePage)
+
 export default userSlice.reducer;
