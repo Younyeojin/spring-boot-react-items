@@ -2,6 +2,9 @@ package shop.tripn.api.backend.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.tripn.api.backend.board.domain.Article;
 import shop.tripn.api.backend.board.repository.BoardRepository;
@@ -11,12 +14,12 @@ import shop.tripn.api.backend.common.CommonController;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RequestMapping("/articles")
 @RequiredArgsConstructor
+@RestController
 public class BoardController implements CommonController<Article, Long> {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
-
 
     @Override
     public ResponseEntity<List<Article>> findAll() {
@@ -49,8 +52,8 @@ public class BoardController implements CommonController<Article, Long> {
         return ResponseEntity.ok(boardRepository.count());
     }
 
-    @Override
-    public ResponseEntity<String> deleteById(Long id) {
+    @Override @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         boardRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }

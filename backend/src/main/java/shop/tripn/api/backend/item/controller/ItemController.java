@@ -2,6 +2,8 @@ package shop.tripn.api.backend.item.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shop.tripn.api.backend.common.CommonController;
 import shop.tripn.api.backend.item.domain.Item;
@@ -11,8 +13,9 @@ import shop.tripn.api.backend.item.service.ItemService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RequestMapping("/items")
 @RequiredArgsConstructor
+@RestController
 public class ItemController implements CommonController<Item, Long> {
     private final ItemService itemService;
     private final ItemRepository itemRepository;
@@ -49,6 +52,7 @@ public class ItemController implements CommonController<Item, Long> {
         return ResponseEntity.ok(itemRepository.count());
     }
 
+    @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteById(Long id) {
         itemRepository.deleteById(id);

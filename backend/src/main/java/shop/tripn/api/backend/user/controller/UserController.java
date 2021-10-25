@@ -26,39 +26,34 @@ public class UserController implements CommonController<User, Long> {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
+        return ResponseEntity.ok(
+                userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
     }
-
+    @Override
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable long id) {
-        System.out.println("--------");
-        User user = userService.findById(id).get();
-        UserDto userSerializer = UserDto.builder()
-                .userId(user.getUserId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .name(user.getName())
-                .email(user.getEmail())
-                .regDate(user.getRegDate())
-                .build();
-        return new ResponseEntity<>(userSerializer, HttpStatus.OK);
+    public ResponseEntity<User> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(userRepository.getById(id));
     }
-
+    @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(userRepository.findAll());
     }
 
-    @Override
-    public ResponseEntity<User> getById(Long id) {
-        return ResponseEntity.ok(userRepository.getById(id));
-    }
+
     @PostMapping
     @Override
     public ResponseEntity<String> save(@RequestBody User user) {
         logger.info(String.format("회원가입 정보: %s", user.toString()));
         userRepository.save(user);
         return ResponseEntity.ok("SUCCESS");
+    }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody User user) {
+        logger.info(String.format("회원수정 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok(userRepository.getById(user.getUserId()));
     }
 
     @Override
@@ -75,13 +70,12 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<Long> count() {
         return ResponseEntity.ok(userRepository.count());
     }
-
+    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteById(Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }
 
 
 }
-
