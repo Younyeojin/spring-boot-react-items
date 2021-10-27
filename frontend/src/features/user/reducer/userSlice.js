@@ -2,18 +2,19 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { userAPI } from 'features/user';
 
 const userJoinPage = async(x) => {
-  const res = await userAPI.userJoin(x)
+   const res = await userAPI.userJoin(x)
+   return res.data
+}
+const userDetailPage = async(x) => {
+  const res = await userAPI.userDetail(x)
   return res.data
 }
-const userFetchOnePage = async(x) => {
-  const res = await userAPI.userFetchOne(x)
+const userListPage = async() => {
+  const res = await userAPI.userList()
   return res.data
-}
-const userFetchListPage = async() => {
-  const res = await userAPI.userFetchList()
 }
 const userLoginPage = async(x) => {
-  const res = await userAPI.userLogin(x)
+  const res = await userAPI.userLogin(x) 
   return res.data
 }
 const userModifyPage = async(x) => {
@@ -26,16 +27,18 @@ const userRemovePage = async(x) => {
 }
 
 export const joinPage = createAsyncThunk('users/join', userJoinPage)
-export const FetchOnePage = createAsyncThunk('users/one', userFetchOnePage)
-export const FetchListPage = createAsyncThunk('users/list', userFetchListPage)
-export const LoginPage = createAsyncThunk('users/login', userLoginPage)
-export const ModifyPage = createAsyncThunk('users/modify', userModifyPage)
-export const RemovePage = createAsyncThunk('users/remove', userRemovePage)
+export const detailPage = createAsyncThunk('users/dtail', userDetailPage)
+export const listPage = createAsyncThunk('users/list', userListPage)
+export const loginPage = createAsyncThunk('users/login', userLoginPage)
+export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
+export const removePage = createAsyncThunk('users/remove', userRemovePage)
 
 const userSlice = createSlice({
-  name: users,
+  name: 'users',
   initialState: {
-    userState: {},
+    userState: {
+      username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
+    },
     type: '',
     keyword: '',
     params: {}
@@ -51,7 +54,7 @@ const userSlice = createSlice({
     },
     [modifyPage.fulfilled]: ( state, action ) => { 
       state.userState = action.payload 
-      window.localStorage.setItem('sessionUser', JSON.stringify(payload))
+      window.localStorage.setItem('sessionUser', JSON.stringify(action.payload))
     },
     [removePage.fulfilled]: ( state, {meta, payload }) => { 
       state.userState = payload

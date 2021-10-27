@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory  } from 'react-router-dom';
+
 export default function UserLogin() {
   const [login, setLogin] = useState({})
   const {username, password} = login
@@ -22,6 +23,7 @@ export default function UserLogin() {
     e.preventDefault()
     e.stopPropagation()
     const loginRequest = {username, password}
+    /*
     userLogin(loginRequest)
     .then(res => {
       const user = res.data;
@@ -38,7 +40,7 @@ export default function UserLogin() {
       alert('접속 실패' + err)
       changeNull(['username','password'])
     })
-
+*/
   }
  
   return (
