@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from 'features/user/reducer/userSlice'
+// import { logout } from 'features/user/reducer/userSlice'
+import { Logout } from '..';
 export default function UserDetail() {
     const detail = JSON.parse(window.localStorage.getItem('sessionUser'))
     
@@ -41,7 +42,7 @@ export default function UserDetail() {
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
             </li>
             <li>
-                <input type="button" value="로그아웃" />
+                <Logout/>
             </li>
         </ul>
     </div>
