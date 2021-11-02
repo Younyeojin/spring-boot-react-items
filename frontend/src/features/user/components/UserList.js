@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { UserListForm } from '..';
-
+import { useSelector } from 'react-redux';
 
 export default function UserList() {
   const [list, setList] = useState([])
+  const todo = useSelector((state) => state.todos[props.id])
  
 
   const userList = () => {
