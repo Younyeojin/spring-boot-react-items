@@ -11,6 +11,7 @@ import shop.tripn.api.backend.user.domain.User;
 import shop.tripn.api.backend.user.domain.UserDto;
 import shop.tripn.api.backend.user.repository.UserRepository;
 import shop.tripn.api.backend.user.service.UserService;
+import shop.tripn.api.backend.user.service.UserServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,41 +20,44 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
-public class UserController implements CommonController<User, Long> {
+public final class UserController implements CommonController<User, Long> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        return ResponseEntity.ok(
-                userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
+//        return new ResponseEntity<>(userService.login(user.getUsername(), user.getPassword()), HttpStatus.OK);
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
     }
 
+    @GetMapping
     @Override
     public ResponseEntity<List<User>> findAll() {
-        return null;
-    }
-
-    @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(userRepository.getById(id));
-    }
-    @GetMapping("/list/{page}")
-
-    public ResponseEntity<List<User>> getList(@PathVariable int page) {
-        System.out.println("::::::: PageNumber :::::::: "+page);
         return ResponseEntity.ok(userRepository.findAll());
     }
 
+    @GetMapping("/{id}")
+    @Override
+    public ResponseEntity<User> getById(@PathVariable Long id) {
+//        System.out.println("id: " + id);
+//        User u = userRepository.getById(id );
+//        System.out.println(u.toString());
+        return ResponseEntity.ok(userRepository.getById(id));
+    }
 
-    @PostMapping
+    @GetMapping("/list/{page}")
+    public ResponseEntity<List<User>> getList(@PathVariable int page) {
+//        System.out.println("::::::: PageNumber :::::::: "+page);
+        return ResponseEntity.ok(userRepository.findAll());
+    }
+
+    @PostMapping("/join")
     @Override
     public ResponseEntity<String> save(@RequestBody User user) {
-        logger.info(String.format("회원가입 정보: %s", user.toString()));
+        logger.info(String.format("회원가입 정보 %s", user.toString()));
         userRepository.save(user);
-        return ResponseEntity.ok("SUCCESS");
+        return ResponseEntity.ok("Save SUCCESS");
     }
 
     @PutMapping
@@ -86,13 +90,12 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<Long> count() {
         return ResponseEntity.ok(userRepository.count());
     }
+
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
-
         userRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }
-
 
 }

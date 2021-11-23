@@ -8,8 +8,9 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter @Setter @ToString
-public class UserDto implements Serializable {
+public class UserDto implements Serializable{
     private static final long serialVersionUID = 1L;
+
     private long userId;
     private String username;
     private String password;
@@ -19,7 +20,8 @@ public class UserDto implements Serializable {
     private List<Article> articleList;
 
     @Builder
-    UserDto(long userId, String username, String password, String name, String email, String regDate){
+    UserDto(long userId, String username, String password, String name,
+            String email, String regDate ){
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -28,7 +30,8 @@ public class UserDto implements Serializable {
         this.regDate = regDate;
     }
     @Builder
-    UserDto(long userId, String username, String password, String name, String email, String regDate, List<Article> articleList){
+    UserDto(long userId, String username, String password, String name,
+            String email, String regDate, List<Article> articleList ){
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -37,4 +40,5 @@ public class UserDto implements Serializable {
         this.regDate = regDate;
         this.articleList = articleList;
     }
+
 }
